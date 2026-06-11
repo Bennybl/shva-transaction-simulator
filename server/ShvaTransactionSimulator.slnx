@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Shva.TransactionSimulator.Api/Shva.TransactionSimulator.Api.csproj" />
+  <Project Path="Shva.TransactionSimulator.Tests/Shva.TransactionSimulator.Tests.csproj" />
+</Solution>

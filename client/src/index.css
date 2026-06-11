@@ -1,0 +1,36 @@
+:root {
+  --color-primary: #5246b8;
+  --color-primary-dark: #3a2f8c;
+  --color-primary-light: #e4dcf5;
+  --color-primary-lighter: #f3effb;
+  --color-text: #1f1f2e;
+  --color-text-muted: #6b6b7b;
+  --color-border: #d9d6e4;
+  --color-surface: #ffffff;
+  --color-error: #c0392b;
+  --color-success: #1e8e3e;
+  --shadow-card: 0 2px 10px rgba(40, 30, 90, 0.08);
+  --radius-card: 12px;
+
+  font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--color-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-surface);
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}

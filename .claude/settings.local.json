@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(dotnet new sln -n ShvaTransactionSimulator -o server)",
+      "PowerShell(dotnet new webapi --use-controllers -n Shva.TransactionSimulator.Api -o server/Shva.TransactionSimulator.Api)",
+      "PowerShell(dotnet new xunit -n Shva.TransactionSimulator.Tests -o server/Shva.TransactionSimulator.Tests)",
+      "PowerShell(dotnet sln server/ShvaTransactionSimulator.sln add server/Shva.TransactionSimulator.Api server/Shva.TransactionSimulator.Tests)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Tests reference server/Shva.TransactionSimulator.Api)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Api package Microsoft.EntityFrameworkCore.SqlServer)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Api package Microsoft.EntityFrameworkCore.Design)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Api package TimeZoneConverter)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Api package Swashbuckle.AspNetCore)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Api package Microsoft.AspNetCore.Authentication.JwtBearer)",
+      "PowerShell(dotnet add server/Shva.TransactionSimulator.Tests package Microsoft.EntityFrameworkCore.Sqlite)",
+      "PowerShell(dotnet new tool-manifest -o .)",
+      "PowerShell(dotnet tool install dotnet-ef)",
+      "PowerShell(dotnet ef migrations add InitialCreate --project server/Shva.TransactionSimulator.Api)",
+      "PowerShell(dotnet test server/ShvaTransactionSimulator.slnx --nologo)",
+      "PowerShell(dotnet ef migrations remove --project server/Shva.TransactionSimulator.Api --force)",
+      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml build)",
+      "PowerShell(Start-Process \"C:\\\\Program Files\\\\Docker\\\\Docker\\\\Docker Desktop.exe\")",
+      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml up -d)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { $p = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue; \"{0}  PID={1}  {2}\" -f $_.LocalAddress, $_.OwningProcess, $p.ProcessName })",
+      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml up -d client)",
+      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml ps --format '{{.Name}}  {{.State}}  {{.Status}}')",
+      "PowerShell(docker exec shva-db-1 /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Shva_Local_Dev_Pa55!' -d ShvaTransactionSimulator -Q \"SET NOCOUNT ON; SELECT RegionName, CONVERT\\(varchar\\(5\\),LocalTime\\) AS LocalTime, Status FROM Transactions ORDER BY CreatedAtUtc;\")",
+      "PowerShell($r = Invoke-WebRequest 'http://localhost:8080/' -UseBasicParsing; \"HTTP $\\($r.StatusCode\\); has #root div: $\\($r.Content -match 'id=\\\\\"root\\\\\"'\\); has bundle: $\\($r.Content -match 'src=\\\\\"/assets/'\\)\")",
+      "Bash(git init *)",
+      "Bash(git config *)"
+    ]
+  }
+}
