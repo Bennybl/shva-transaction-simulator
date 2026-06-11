@@ -12,11 +12,24 @@ export function AuthPage() {
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  const switchMode = (next: 'login' | 'signup') => {
+    setMode(next);
+    setConfirmPassword('');
+    setError(null);
+  };
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    if (mode === 'signup' && password !== confirmPassword) {
+      setError(t('passwordMismatch'));
+      return;
+    }
+
     setSubmitting(true);
     setError(null);
     try {
@@ -39,14 +52,14 @@ export function AuthPage() {
           <button
             type="button"
             className={mode === 'login' ? styles.tabActive : styles.tab}
-            onClick={() => setMode('login')}
+            onClick={() => switchMode('login')}
           >
             {t('login')}
           </button>
           <button
             type="button"
             className={mode === 'signup' ? styles.tabActive : styles.tab}
-            onClick={() => setMode('signup')}
+            onClick={() => switchMode('signup')}
           >
             {t('signup')}
           </button>
@@ -78,6 +91,22 @@ export function AuthPage() {
             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
           />
         </label>
+
+        {mode === 'signup' && (
+          <label className={styles.label}>
+            {t('confirmPassword')}
+            <input
+              className={styles.input}
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              minLength={6}
+              maxLength={100}
+              autoComplete="new-password"
+            />
+          </label>
+        )}
 
         {error && <p className={styles.error}>{error}</p>}
 

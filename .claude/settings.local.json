@@ -26,7 +26,9 @@
       "PowerShell(docker exec shva-db-1 /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Shva_Local_Dev_Pa55!' -d ShvaTransactionSimulator -Q \"SET NOCOUNT ON; SELECT RegionName, CONVERT\\(varchar\\(5\\),LocalTime\\) AS LocalTime, Status FROM Transactions ORDER BY CreatedAtUtc;\")",
       "PowerShell($r = Invoke-WebRequest 'http://localhost:8080/' -UseBasicParsing; \"HTTP $\\($r.StatusCode\\); has #root div: $\\($r.Content -match 'id=\\\\\"root\\\\\"'\\); has bundle: $\\($r.Content -match 'src=\\\\\"/assets/'\\)\")",
       "Bash(git init *)",
-      "Bash(git config *)"
+      "Bash(git config *)",
+      "Bash(rtk gh *)",
+      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml up -d --build client)"
     ]
   }
 }

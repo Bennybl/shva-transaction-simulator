@@ -32,7 +32,7 @@ export function TimeInput({
     <div className={styles.panel}>
       <div className={styles.title}>{t('enterTime')}</div>
 
-      <div className={styles.inputsRow}>
+      <div className={styles.inputsRow} dir="ltr">
         <div className={styles.timeColumn}>
           <input
             className={styles.timeBox}
