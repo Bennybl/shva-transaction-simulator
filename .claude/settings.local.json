@@ -28,7 +28,17 @@
       "Bash(git init *)",
       "Bash(git config *)",
       "Bash(rtk gh *)",
-      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml up -d --build client)"
+      "PowerShell(docker compose -f C:\\\\HA\\\\Shva\\\\docker-compose.yml up -d --build client)",
+      "Bash(powershell -Command \"\\(Get-Content README.md -Raw\\) -replace '\\(?s\\)\\\\| Id   \\\\| Region.*?\\\\n\\\\nUSA is deliberately split.*?local time\\\\.', '| Id   | Region  | IANA Time Zone      |\\\\n|------|---------|---------------------|\\\\n| IL   | Israel  | Asia/Jerusalem      |\\\\n| FR   | France  | Europe/Paris        |\\\\n| CY   | Cyprus  | Asia/Nicosia        |\\\\n| IT   | Italy   | Europe/Rome         |\\\\n| JP   | Japan   | Asia/Tokyo          |\\\\n| US   | USA     | America/New_York    |' | Set-Content README.md\")",
+      "Bash(powershell -Command \"Select-String -Path README.md -Pattern 'US' | Select-Object -First 10\")",
+      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\nodejs\\\\npm.cmd\",\"$env:APPDATA\\\\npm\\\\npm.cmd\",\"${env:ProgramFiles\\(x86\\)}\\\\nodejs\\\\npm.cmd\",\"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\npm.cmd\"\\); foreach \\($p in $paths\\) { if \\(Test-Path $p\\) { Write-Output \"FOUND: $p\" } }; Get-Command node -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source)",
+      "PowerShell($found = Get-ChildItem -Path \"C:\\\\Program Files\\\\nodejs\",\"C:\\\\Program Files \\(x86\\)\\\\nodejs\",\"$env:LOCALAPPDATA\\\\Programs\" -Filter \"npm.cmd\" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 3 -ExpandProperty FullName; if \\($found\\) { $found } else { \"none in common dirs\" }; where.exe node 2>$null; where.exe npm 2>$null)",
+      "PowerShell($d = Get-Command docker -ErrorAction SilentlyContinue; if \\($d\\) { Write-Output \"docker -> $\\($d.Source\\)\"; docker version --format '{{.Server.Version}}' 2>$null; if \\($?\\) { Write-Output 'DAEMON: running' } else { Write-Output 'DAEMON: not running' } } else { Write-Output 'docker not found' })",
+      "PowerShell($pub = \"c:\\\\HA\\\\Shva\\\\client\\\\public\"; if \\(-not \\(Test-Path $pub\\)\\) { New-Item -ItemType Directory -Path $pub | Out-Null; Write-Output \"Created: $pub\" } else { Write-Output \"Exists: $pub\" }; Get-ChildItem $pub -ErrorAction SilentlyContinue | Select-Object Name)",
+      "Bash(node -e ' *)",
+      "Bash(rtk find *)",
+      "PowerShell(dotnet build \"c:\\\\HA\\\\Shva\\\\server\\\\ShvaTransactionSimulator.slnx\" -c Release)",
+      "PowerShell($env:CI=\"1\"; Set-Location \"c:\\\\HA\\\\Shva\\\\client\"; if \\(-not \\(Test-Path node_modules\\)\\) { npm ci } ; npm run build)"
     ]
   }
 }

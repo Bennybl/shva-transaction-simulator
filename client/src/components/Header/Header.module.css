@@ -1,10 +1,14 @@
 .header {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 28px;
-  background: var(--color-surface);
-  border-bottom: 1px solid #f0eef6;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  height: 99px;
+  padding: 32px;
+  background: var(--ui-surface);
+  border-bottom: 1px solid var(--ui-border);
 }
 
 .logo {
@@ -13,34 +17,42 @@
   gap: 8px;
 }
 
-.logoText {
-  font-size: 30px;
-  font-weight: 600;
-  color: var(--color-primary-dark);
-  letter-spacing: 0.5px;
-  line-height: 1;
+.logoImg {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .logout {
-  border: none;
-  background: none;
-  color: var(--color-text-muted);
-  font-size: 13px;
-  text-decoration: underline;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 8px 12px;
+  border: 1px solid var(--ui-secondary-border);
+  border-radius: 8px;
+  background: var(--ui-secondary-btn);
+  color: var(--ui-text);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.logout:hover {
+  background: #d7d7d7;
 }
 
 @media (max-width: 600px) {
   .header {
-    padding: 12px 16px;
+    height: auto;
+    padding: 16px;
   }
 
-  .logoText {
-    font-size: 24px;
+  .logoImg {
+    height: 32px;
   }
 }

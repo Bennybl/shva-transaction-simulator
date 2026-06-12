@@ -51,10 +51,10 @@ export function RegionSelect({ regions, selectedRegion, onSelect }: RegionSelect
           }}
           aria-label={t('region')}
         />
-        {(selectedRegion || query) && (
+        {selectedRegion || query ? (
           <button
             type="button"
-            className={styles.clear}
+            className={styles.trailing}
             aria-label="Clear"
             onClick={() => {
               setQuery('');
@@ -64,6 +64,10 @@ export function RegionSelect({ regions, selectedRegion, onSelect }: RegionSelect
           >
             ⊗
           </button>
+        ) : (
+          <span className={`${styles.trailing} ${styles.chevron}`} aria-hidden="true">
+            ▾
+          </span>
         )}
       </fieldset>
 

@@ -1,24 +1,27 @@
 .toggle {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 .button,
 .active {
-  padding: 6px 14px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
-  font-size: 13px;
-  font-weight: 500;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1;
 }
 
 .button {
-  background: #efefef;
-  color: var(--color-text);
+  border: 1px solid var(--ui-secondary-border);
+  background: var(--ui-secondary-btn);
+  color: var(--ui-text);
 }
 
 .active {
-  background: #1f1f2e;
-  border-color: #1f1f2e;
-  color: #ffffff;
+  border: 1px solid var(--ui-primary-btn);
+  background: var(--ui-primary-btn);
+  color: #f5f5f5;
 }

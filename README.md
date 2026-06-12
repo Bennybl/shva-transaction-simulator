@@ -61,17 +61,14 @@ region's local time") is a one-line change — a deliberate discussion point.
 
 ### Supported regions
 
-| Id   | Region        | IANA Time Zone      |
-|------|---------------|---------------------|
-| IL   | Israel        | Asia/Jerusalem      |
-| FR   | France        | Europe/Paris        |
-| CY   | Cyprus        | Asia/Nicosia        |
-| IT   | Italy         | Europe/Rome         |
-| JP   | Japan         | Asia/Tokyo          |
-| US-E | USA - Eastern | America/New_York    |
-| US-P | USA - Pacific | America/Los_Angeles |
-
-USA is deliberately split by time zone — a single "USA" has no unambiguous local time.
+| Id   | Region  | IANA Time Zone   |
+|------|---------|------------------|
+| IL   | Israel  | Asia/Jerusalem   |
+| FR   | France  | Europe/Paris     |
+| CY   | Cyprus  | Asia/Nicosia     |
+| IT   | Italy   | Europe/Rome      |
+| JP   | Japan   | Asia/Tokyo       |
+| US   | USA     | America/New_York |
 
 ## Run with Docker Compose (recommended)
 
@@ -201,3 +198,4 @@ Table `Users`: username (unique) + ASP.NET Identity password hash.
         ├── auth/                 # auth context (JWT)
         └── pages/                # HomePage, AuthPage
 ```
+
