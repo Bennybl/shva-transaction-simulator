@@ -121,7 +121,7 @@ dotnet ef migrations add <Name> --project server/Shva.TransactionSimulator.Api
 dotnet test server/ShvaTransactionSimulator.slnx
 ```
 
-15 tests cover: banking-hour boundaries (07:59 / 08:00 / 17:59 / 18:00 / 18:01),
+The suite covers: banking-hour boundaries (07:59 / 08:00 / 17:59 / 18:00 / 18:01),
 instant→region-local conversion (incl. DST and date rollover), offset handling, unknown
 region rejection, persistence of both statuses, approved-only retrieval, ordering, and limits.
 
@@ -174,7 +174,6 @@ Table `Users`: username (unique) + ASP.NET Identity password hash.
 - No refresh tokens / password reset — auth is intentionally minimal (bonus scope).
 - The region list is hardcoded server-side (assignment scope); it is served via
   `GET /api/regions` so a DB-backed list is a drop-in change.
-- `npm install` (not `npm ci`) in the client image — no lockfile is committed.
 
 ## Project Structure
 

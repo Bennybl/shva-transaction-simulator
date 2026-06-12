@@ -15,3 +15,6 @@ dist/
 # Local env
 *.local
 .env
+
+# Claude Code local settings
+.claude/

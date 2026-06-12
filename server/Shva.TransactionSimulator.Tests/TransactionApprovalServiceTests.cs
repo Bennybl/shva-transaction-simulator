@@ -86,21 +86,39 @@ public sealed class TransactionApprovalServiceTests : IDisposable
     }
 
     [Fact]
-    public async Task Simulate_ConvertsInstantToRegionLocalTime_UsPacific_RejectedAtClosingBoundary()
+    public async Task Simulate_ConvertsInstantToRegionLocalTime_Us_DateRollsBack()
     {
-        // 01:00 UTC on June 11 is 18:00 on June 10 in US Pacific (UTC-7, DST) -> 18:00 is exclusive -> Rejected.
+        // 01:00 UTC on June 11 is 21:00 on June 10 in New York (UTC-4, DST) -> Rejected, previous local date.
         var response = await _service.SimulateAsync(
             new SimulateTransactionRequest
             {
-                RegionId = "US-P",
+                RegionId = "US",
                 SubmittedAt = new DateTimeOffset(2026, 6, 11, 1, 0, 0, TimeSpan.Zero)
             },
             userId: null,
             CancellationToken.None);
 
         Assert.Equal(TransactionStatus.Rejected, response.Status);
-        Assert.Equal("18:00", response.LocalTime);
+        Assert.Equal("21:00", response.LocalTime);
         Assert.Equal(new DateOnly(2026, 6, 10), response.LocalDate);
+    }
+
+    [Fact]
+    public async Task Simulate_Us_RejectedAtClosingBoundary()
+    {
+        // 22:00 UTC on June 11 is exactly 18:00 in New York (UTC-4, DST) -> 18:00 is exclusive -> Rejected.
+        var response = await _service.SimulateAsync(
+            new SimulateTransactionRequest
+            {
+                RegionId = "US",
+                SubmittedAt = new DateTimeOffset(2026, 6, 11, 22, 0, 0, TimeSpan.Zero)
+            },
+            userId: null,
+            CancellationToken.None);
+
+        Assert.Equal(TransactionStatus.Rejected, response.Status);
+        Assert.Equal("18:00", response.LocalTime);
+        Assert.Equal(new DateOnly(2026, 6, 11), response.LocalDate);
     }
 
     [Fact]
