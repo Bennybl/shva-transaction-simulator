@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Shva.TransactionSimulator.Api.Application.Interfaces;
 using Shva.TransactionSimulator.Api.Application.Services;
+using Shva.TransactionSimulator.Api.Infrastructure.ErrorHandling;
 using Shva.TransactionSimulator.Api.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+// Global exception handling: unhandled exceptions become RFC 7807 ProblemDetails (500).
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -57,6 +62,9 @@ var app = builder.Build();
 await MigrateDatabaseAsync(app);
 
 // --- Pipeline ---
+
+// Must run first so it can catch exceptions thrown by any downstream middleware.
+app.UseExceptionHandler();
 
 app.UseSwagger();
 app.UseSwaggerUI();
